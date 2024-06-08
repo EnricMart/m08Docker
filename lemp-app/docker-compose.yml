@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
- 
   nginx:
     image: nginx:alpine
     container_name: nginx
@@ -14,7 +13,6 @@ services:
       - app
       - db
 
-  
   db:
     image: postgres
     container_name: postgres
@@ -27,7 +25,6 @@ services:
       POSTGRES_USER: root 
       POSTGRES_PASSWORD: password 
 
- 
   app:
     container_name: blog
     build: 
@@ -39,7 +36,6 @@ services:
       - "9000:9000"
     working_dir: /var/www
 
- 
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgAdmin
@@ -56,24 +52,7 @@ services:
       context: ./vue
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "7500:8080"
     depends_on:
-      - landing
+      - app
 
-  landing:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - "8081:80"  
-
-
-
-  # composer:
-  #   image: composer:2.6.6
-  #   volumes: 
-  #     - ./src:/app
-  # command:
-  #   - bash
-  #   - -c
-  #   - "composer update && composer install"  
