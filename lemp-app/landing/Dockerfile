@@ -1,22 +1,15 @@
+
 FROM node:16-alpine3.12
 
-# Crear directorio de la aplicación
+#creamos carpeta app 
 RUN mkdir -p /app
-
-# Establecer directorio de trabajo
+#entramos en la carpeta app
 WORKDIR /app
-
-# Copiar archivos package*.json
+#copiamos el package json en app
 COPY ./package*.json .
-
-# Instalar dependencias
+#actualizamos dependencias de node.js
 RUN npm install
-
-# Cambiar el propietario del directorio /app al usuario 'node'
-RUN chown -R node:node /app
-
-# Cambiar al usuario 'node' para ejecutar la aplicación
-USER node
-
-# Comando para iniciar la aplicación Vue.js
+#indicamos el puerto
+EXPOSE 7500
+#runeamos el servidor 7500
 CMD [ "npm", "run", "serve", "--", "--port", "7500" ]
