@@ -10,9 +10,11 @@ services:
     volumes:
       - ./src:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./landing:/landing
     depends_on:
       - app
       - db
+      - vue
 
   
   db:
@@ -51,22 +53,15 @@ services:
       PGADMIN_DEFAULT_EMAIL: hanieasemi76@gmail.com
       PGADMIN_DEFAULT_PASSWORD: password 
 
-  vue: 
+  vue:
+    container_name: landing
     build: 
-      context: ./vue
+      context: ./landing
+      dockerfile: Dockerfile
     ports:
       - "7500:7500"
     volumes:
-      - ./vue:/app
-    container_name: vue
-    # command:
-    #   - sh
-    #   - -c
-    #   - "yarn install && npm run serve --port 7500"
-
-
-
-
+      - ./landing:/app
 
   # composer:
   #   image: composer:2.6.6
