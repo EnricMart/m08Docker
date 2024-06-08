@@ -59,7 +59,7 @@ services:
       context: ./landing
       dockerfile: Dockerfile
     ports:
-      - "7500:80"
+      - "7500:7500"
     volumes:
       - ./landing:/app
 
