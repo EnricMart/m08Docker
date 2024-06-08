@@ -10,6 +10,6 @@ COPY ./package*.json .
 #actualizamos dependencias de node.js
 RUN npm install
 #indicamos el puerto
-EXPOSE 7500
+#EXPOSE 7500
 #runeamos el servidor 7500
-CMD [ "npm", "run", "serve", "--", "--port", "7500" ]
+#CMD [ "npm", "run", "serve", "--", "--port", "7500" ]
