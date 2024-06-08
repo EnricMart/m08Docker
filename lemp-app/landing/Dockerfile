@@ -9,6 +9,5 @@ COPY ./package*.json .
 
 RUN npm install
 
-# EXPOSE 7500
 
-# CMD [ "npm", "run", "serve", "--", "--port", "7500" ]
+ CMD [ "npm", "run", "serve", "--", "--port", "7500" ]
