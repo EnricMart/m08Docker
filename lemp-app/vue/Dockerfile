@@ -8,7 +8,7 @@ RUN yarn global add @vue/cli
 WORKDIR /app
 
 # Copiar el archivo package.json y bloquear dependencias
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Instalar dependencias
 RUN yarn install
