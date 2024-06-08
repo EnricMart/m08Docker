@@ -1,24 +1,20 @@
 FROM node:16-alpine3.12
 
-RUN npm install @vue/cli -g
-RUN mkdir -p /app
-
 #Establece el work directory en /app
 WORKDIR /app
 
-#package.json COPY al /app
-COPY package.json ./
+#package.json y yarn.lock COPY al /app
+COPY package.json yarn.lock ./
+
+RUN yarn install
 
 #Copia el resto de los archivos de la aplicación al /app
 COPY . .
 
+RUN yarn install
 
-#Usa la imagen base de Nginx
-FROM nginx:alpine
+RUN yarn global add http-server
 
+EXPOSE 8080
 
-RUN npm install
-
-EXPOSE 7500 
-
-CMD [ "npm","run","serve","--","--port","7500"]
+CMD ["http-server", "dist"]
