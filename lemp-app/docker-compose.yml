@@ -1,8 +1,7 @@
 version: '3.8'
 
 services:
-
-  # Web Server Service
+ 
   nginx:
     image: nginx:alpine
     container_name: nginx
@@ -15,17 +14,7 @@ services:
       - app
       - db
 
-  #Database Service
-  # db:
-  #   image : mysql
-  #   container_name : mysql
-  #   volumes:
-  #     - ./mysql/data:/var/lib/mysql
-  #   ports:
-  #     - "3306:3306"
-  #   environment:
-  #     MYSQL_DATABASE: blog
-  #     MYSQL_ROOT_PASSWORD: password
+  
   db:
     image: postgres
     container_name: postgres
@@ -38,7 +27,7 @@ services:
       POSTGRES_USER: root 
       POSTGRES_PASSWORD: password 
 
-  # Application Service
+ 
   app:
     container_name: blog
     build: 
@@ -50,14 +39,7 @@ services:
       - "9000:9000"
     working_dir: /var/www
 
-  #phpMyAdmin Service
-  # phpmyadmin:
-  #   image: phpmyadmin/phpmyadmin
-  #   container_name: phpmyadmin
-  #   ports:
-  #     - "3400:80"
-  #   depends_on:
-  #     - db
+ 
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgAdmin
@@ -68,3 +50,22 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: hanieasemi76@gmail.com
       PGADMIN_DEFAULT_PASSWORD: password 
+
+  vue: 
+    build: 
+      context: ./vue
+      dockerfile: Dockerfile
+    ports:
+      - "7500:7500"
+    volumes:
+      - ./vue:/app
+    container_name: vue
+
+  composer:
+    image: composer:2.6.6
+    volumes: 
+      - ./src:/app
+  command:
+    - bash
+    - -c
+    - "composer update && composer install"  
