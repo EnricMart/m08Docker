@@ -1,6 +1,6 @@
 FROM node:16-alpine3.12
 
-RUN yarn global add @vue/cli
+RUN npm install @vue/cli -g
 RUN mkdir -p /app
 
 #Establece el work directory en /app
