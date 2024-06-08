@@ -1,9 +1,8 @@
-# Etapa de construcción de la aplicación Vue.js
-FROM node:16-alpine3.12 AS builder
+FROM node:16-alpine3.12
 
 # Instalar el CLI de Vue.js de forma global
 RUN yarn global add @vue/cli
-
+RUN mkdir -p /app
 # Crear el directorio de la aplicación
 WORKDIR /app
 
@@ -25,5 +24,4 @@ FROM nginx:alpine
 
 # Copiar los archivos generados de la etapa de construcción anterior a la imagen de Nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
-
 
