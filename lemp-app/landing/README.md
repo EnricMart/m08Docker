@@ -1,4 +1,4 @@
-# vue
+# landing
 
 ## Project setup
 ```
