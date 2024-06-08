@@ -1,27 +1,19 @@
 FROM node:16-alpine3.12
 
-# Instalar el CLI de Vue.js de forma global
 RUN yarn global add @vue/cli
 RUN mkdir -p /app
-# Crear el directorio de la aplicación
+#Establece el work directory en /app
 WORKDIR /app
 
-# Copiar el archivo package.json y bloquear dependencias
+#package.json COPY al /app
 COPY package.json ./
-
-# Instalar dependencias
+#Actualizar dependencias con yarn
 RUN yarn install
-
-# Copiar el resto de los archivos de la aplicación
+#Copia el resto de los archivos de la aplicación al /app
 COPY . .
 
-# Compilar la aplicación Vue.js para producción
+#Compila la aplicación del Vue para producción
 RUN yarn build
 
-
-# Etapa final para la imagen de producción
+#Usa la imagen base de Nginx
 FROM nginx:alpine
-
-# Copiar los archivos generados de la etapa de construcción anterior a la imagen de Nginx
-COPY --from=builder /app/dist /usr/share/nginx/html
-
