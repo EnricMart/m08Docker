@@ -59,10 +59,10 @@ services:
     volumes:
       - ./vue:/app
     container_name: vue
-    command:
-      - sh
-      - -c
-      - "npm install && npm run serve --port 7500"
+    # command:
+    #   - sh
+    #   - -c
+    #   - "yarn install && npm run serve --port 7500"
 
 
 
