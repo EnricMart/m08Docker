@@ -1,7 +1,7 @@
 
 FROM node:16-alpine3.12
 
-#creamos carpeta app 
+#creamos carpeta app
 RUN mkdir -p /app
 #entramos en la carpeta app
 WORKDIR /app
